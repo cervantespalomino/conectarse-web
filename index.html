@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectaRSE | ONG de Comunicación y Responsabilidad Social</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-vibrante: #0056b3;
+            --verde-menta: #2ecc71;
+            --amarillo: #f1c40f;
+            --blanco: #ffffff;
+            --gris-claro: #f4f7f6;
+            --gris-oscuro: #333333;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            color: var(--gris-oscuro);
+            background-color: var(--blanco);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; margin-bottom: 15px; }
+
+        /* --- Header con Iconos --- */
+        header {
+            background-color: var(--azul-vibrante);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        nav a i { margin-right: 5px; color: var(--amarillo); }
+        nav a:hover { color: var(--verde-menta); }
+
+        /* --- Hero Interactivo --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 10%;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+
+        .btn-main {
+            background-color: var(--verde-menta);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-main:hover { 
+            transform: scale(1.1); 
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        /* --- Tarjetas con Iconos --- */
+        section { padding: 80px 10%; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card-icon {
+            text-align: center;
+            padding: 40px;
+            background: var(--gris-claro);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .card-icon:hover { background: white; box-shadow: 0 15px 30px rgba(0,0,0,0.1); transform: translateY(-10px); }
+        .card-icon i { font-size: 3rem; color: var(--azul-vibrante); margin-bottom: 20px; }
+
+        /* --- Chatbot Estilizado --- */
+        #chat-trigger {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--amarillo); color: #333;
+            width: 70px; height: 70px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 3000; font-size: 1.8rem;
+        }
+
+        #chat-box {
+            position: fixed; bottom: 110px; right: 30px;
+            width: 350px; background: white; border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow: hidden; z-index: 3000;
+        }
+        .chat-head { background: var(--azul-vibrante); color: white; padding: 20px; font-weight: bold; }
+        .chat-content { height: 300px; padding: 20px; overflow-y: auto; background: #f9f9f9; }
+        .bot-msg { background: #eee; padding: 10px 15px; border-radius: 15px 15px 15px 0; margin-bottom: 15px; font-size: 0.9rem; }
+        .chat-options { display: flex; flex-direction: column; gap: 8px; }
+        .chat-opt { 
+            background: white; border: 2px solid var(--verde-menta); color: var(--verde-menta);
+            padding: 8px; border-radius: 10px; cursor: pointer; text-align: left; font-weight: 600;
+        }
+        .chat-opt:hover { background: var(--verde-menta); color: white; }
+
+        /* --- Footer --- */
+        footer { background: var(--gris-oscuro); color: white; padding: 50px 10%; text-align: center; }
+        .social-icons a { color: white; font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
+        .social-icons a:hover { color: var(--amarillo); }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><h2><i class="fas fa-globe-americas"></i> ConectaRSE</h2></div>
+    <nav>
+        <a href="#inicio"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#nosotros"><i class="fas fa-users"></i> Quiénes Somos</a>
+        <a href="#proyectos"><i class="fas fa-project-diagram"></i> Proyectos</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <h1>Comunicación con Propósito <i class="fas fa-bullhorn"></i></h1>
+    <p>Empoderamos a comunidades vulnerables a través de la alfabetización digital y las RRPP.</p>
+    <div style="margin-top: 40px;">
+        <a href="#proyectos" class="btn-main">Nuestros Proyectos <i class="fas fa-arrow-right"></i></a>
+        <a href="#contacto" class="btn-main" style="background: var(--amarillo); color: #333;">Únete al Equipo <i class="fas fa-user-plus"></i></a>
+    </div>
+</section>
+
+
+
+<section id="nosotros">
+    <h2 style="text-align:center;">Valores Institucionales</h2>
+    <div class="grid-container">
+        <div class="card-icon">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Ética</h3>
+            <p>Actuamos con total honestidad en nuestra gestión comunicacional.</p>
+        </div>
+        <div class="card-icon">
+            <i class="fas fa-eye"></i>
+            <h3>Transparencia</h3>
+            <p>Fomentamos el acceso libre y claro a la información social.</p>
+        </div>
+        <div class="card-icon">
+            <i class="fas fa-hands-helping"></i>
+            <h3>Inclusión</h3>
+            <p>Trabajamos para que nadie se quede fuera de la era digital.</p>
+        </div>
+    </div>
+</section>
+
+<section class="bg-grey" id="proyectos">
+    <h2 style="text-align:center;">Nuestras Tecnologías <i class="fas fa-laptop-code"></i></h2>
+    <div class="grid-container">
+        <div class="card-icon" style="background:white;">
+            <i class="fas fa-chart-line" style="color:var(--verde-menta)"></i>
+            <h4>Análisis de Datos</h4>
+            <p>Medimos el impacto real de nuestras campañas sociales.</p>
+        </div>
+        <div class="card-icon" style="background:white;">
+            <i class="fab fa-whatsapp-square" style="color:#25D366"></i>
+            <h4>Comunicación Directa</h4>
+            <p>Gestión de comunidades mediante mensajería instantánea.</p>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <h2 style="text-align:center;">Contacto y Sede <i class="fas fa-map-marker-alt"></i></h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 30px;">
+        <div style="flex: 1; min-width: 300px; background: var(--gris-claro); padding: 30px; border-radius: 20px;">
+            <p><i class="fas fa-phone-alt"></i> +51 987 654 321</p>
+            <p><i class="fas fa-envelope"></i> ayuda@conectarse.org</p>
+            <p><i class="fas fa-map-pin"></i> Av. Responsabilidad Social 123, Lima.</p>
+            <hr>
+            <div class="social-icons" style="margin-top: 20px;">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373531531663!3d-37.81627977975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d15f4b21844f!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1617812678881!5m2!1sen!2sus" width="100%" height="300" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p><strong>ConectaRSE ONG</strong> - Transformando el mundo byte a byte.</p>
+    <p><i class="fas fa-code"></i> Página Web Oficial 2026</p>
+</footer>
+
+<div id="chat-trigger" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
+<div id="chat-box">
+    <div class="chat-head"><i class="fas fa-robot"></i> Asistente ConectaRSE</div>
+    <div class="chat-content" id="chat-content">
+        <div class="bot-msg">¡Hola! Soy tu asistente. ¿En qué área de la ONG estás interesado?</div>
+        <div class="chat-options">
+            <button class="chat-opt" onclick="botReply('proyectos')"><i class="fas fa-lightbulb"></i> Ver Proyectos Actuales</button>
+            <button class="chat-opt" onclick="botReply('voluntario')"><i class="fas fa-hand-paper"></i> ¿Cómo ser voluntario?</button>
+            <button class="chat-opt" onclick="botReply('datos')"><i class="fas fa-lock"></i> Política de Datos</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleChat() {
+        const box = document.getElementById('chat-box');
+        box.style.display = (box.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function botReply(tema) {
+        const content = document.getElementById('chat-content');
+        let resp = "";
+
+        if(tema === 'proyectos') resp = "Actualmente lideramos el proyecto 'Alfabetización Digital 2026' y 'Prensa Ciudadana'. ¿Te gustaría participar?";
+        if(tema === 'voluntario') resp = "¡Buscamos jóvenes comunicadores! Regístrate en el botón amarillo de arriba y te contactaremos.";
+        if(tema === 'datos') resp = "Tu privacidad es clave. Usamos tus datos solo para fines institucionales bajo nuestra Política de Privacidad 2026.";
+
+        content.innerHTML += `<div class="bot-msg" style="background:#d4edda; margin-top:10px;">${resp}</div>`;
+        content.scrollTop = content.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
